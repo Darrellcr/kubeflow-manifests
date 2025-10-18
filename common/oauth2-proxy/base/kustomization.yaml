@@ -52,7 +52,7 @@ configMapGenerator:
   # verify, trust and use the JWT. See
   # 'common/oauth2-proxy/components/istio-m2m' for details.
   # Examples:
-  # - EXTRA_JWT_ISSUERS=https://kubernetes.default.svc.cluster.local=https://kubernetes.default.svc.cluster.local
+  # - EXTRA_JWT_ISSUERS=https://kubernetes.default.svc.cluster.pakcarik=https://kubernetes.default.svc.cluster.pakcarik
   # - EXTRA_JWT_ISSUERS=https://oidc.eks.region.amazonaws.com/id/1234abcd=https://kubernetes.default.svc
   - EXTRA_JWT_ISSUERS=
 

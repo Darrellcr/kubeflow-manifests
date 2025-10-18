@@ -21,6 +21,6 @@ spec:
       uri: /
     route:
     - destination:
-        host: model-registry-ui-service.kubeflow.svc.cluster.local
+        host: model-registry-ui-service.kubeflow.svc.cluster.pakcarik
         port:
           number: 80

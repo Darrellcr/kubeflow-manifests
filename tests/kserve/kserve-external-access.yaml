@@ -21,12 +21,12 @@ spec:
     route:
     - destination:
         # Route through cluster-local-gateway (secured with JWT)
-        host: cluster-local-gateway.istio-system.svc.cluster.local
+        host: cluster-local-gateway.istio-system.svc.cluster.pakcarik
       headers:
         request:
           set:
             # Set the correct host header for the target service
-            Host: REPLACE_WITH_SERVICE_NAME.REPLACE_WITH_NAMESPACE.svc.cluster.local
+            Host: REPLACE_WITH_SERVICE_NAME.REPLACE_WITH_NAMESPACE.svc.cluster.pakcarik
       weight: 100
     timeout: 300s
     # Optional: Add CORS headers for browser access

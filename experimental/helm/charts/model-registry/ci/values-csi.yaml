@@ -17,7 +17,7 @@ storage:
         
     env:
     - name: MODEL_REGISTRY_BASE_URL
-      value: "model-registry-service.kubeflow.svc.cluster.local:8080"
+      value: "model-registry-service.kubeflow.svc.cluster.pakcarik:8080"
       
     supportedUriFormats:
     - prefix: "model-registry://"

@@ -7,7 +7,7 @@ metadata:
   labels:
     app: model-registry-ui
 spec:
-  host: {{ include "model-registry.ui.fullname" . }}-service.{{ include "model-registry.namespace" . }}.svc.cluster.local
+  host: {{ include "model-registry.ui.fullname" . }}-service.{{ include "model-registry.namespace" . }}.svc.cluster.pakcarik
   trafficPolicy:
     tls:
       mode: ISTIO_MUTUAL

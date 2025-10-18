@@ -10,7 +10,7 @@ metadata:
   namespace: auth
 data:
   config.yaml: |
-    issuer: http://dex.auth.svc.cluster.local:5556/dex
+    issuer: http://dex.auth.svc.cluster.pakcarik:5556/dex
     storage:
       type: kubernetes
       config:

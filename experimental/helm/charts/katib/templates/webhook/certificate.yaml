@@ -10,7 +10,7 @@ spec:
   commonName: {{ include "katib.controller.serviceName" . }}.{{ include "katib.namespace" . }}.svc
   dnsNames:
   - {{ include "katib.controller.serviceName" . }}.{{ include "katib.namespace" . }}.svc
-  - {{ include "katib.controller.serviceName" . }}.{{ include "katib.namespace" . }}.svc.cluster.local
+  - {{ include "katib.controller.serviceName" . }}.{{ include "katib.namespace" . }}.svc.cluster.pakcarik
   issuerRef:
     kind: Issuer
     name: katib-selfsigned-issuer

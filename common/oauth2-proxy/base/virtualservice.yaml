@@ -13,6 +13,6 @@ spec:
         prefix: /oauth2/
     route:
     - destination:
-        host: OAUTH2_PROXY_SERVICE.OAUTH2_PROXY_NAMESPACE.svc.cluster.local
+        host: OAUTH2_PROXY_SERVICE.OAUTH2_PROXY_NAMESPACE.svc.cluster.pakcarik
         port:
           number: 80

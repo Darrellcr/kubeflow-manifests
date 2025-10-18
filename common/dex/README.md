@@ -1,9 +1,9 @@
 # Kubeflow Dex & Keycloak Integration Guide
 
-In addition to the guidelines for GitHub, Google, Microsoft and other OIDC providers in https://github.com/kubeflow/manifests#dex and direct oauth2-proxy connection without DEX to typical OIDC IDP providers such as Azure in https://github.com/kubeflow/manifests/blob/master/common/oauth2-proxy/README.md#change-the-default-authentication-from-dex--oauth2-proxy-to-oauth2-proxy-only we try to roughly explain here how to configure Dex to use Keycloak as an external OpenID Connect provider for Kubeflow. 
+In addition to the guidelines for GitHub, Google, Microsoft and other OIDC providers in https://github.com/kubeflow/manifests#dex and direct oauth2-proxy connection without DEX to typical OIDC IDP providers such as Azure in https://github.com/kubeflow/manifests/blob/master/common/oauth2-proxy/README.md#change-the-default-authentication-from-dex--oauth2-proxy-to-oauth2-proxy-only we try to roughly explain here how to configure Dex to use Keycloak as an external OpenID Connect provider for Kubeflow.
 
 > [Note]  
-> ✅ Replace the domains of Keycloak and Kubeflow containing `example.com` with ones that are appropriately tailored to the actual situation.   
+> ✅ Replace the domains of Keycloak and Kubeflow containing `example.com` with ones that are appropriately tailored to the actual situation.  
 > ✅ If a realm already exists, there's no need to create one.  
 > ✅ As you know, If the first attempt fails, you can just run it again.
 
@@ -11,18 +11,19 @@ In addition to the guidelines for GitHub, Google, Microsoft and other OIDC provi
 
 ### Create a Realm
 
-- Realm Name: `<my-realm>`
+-   Realm Name: `<my-realm>`
 
 ### Create a Client
-- Client Type: `OpenID Connect`
-- Client ID: `kubeflow-oidc-authservice` (⚠️ Never use a different value)
-- Client Authentication: `On`
-- Authentication Flow: Check `Standard flow` and `Direct access grants`
-- Root URL: `https://kubeflow.example.com`
-- Home URL: `https://kubeflow.example.com`
-- Valid Redirect URIs: `https://kubeflow.example.com/dex/callback`
-- Valid Post Logout Redirect URIs: `https://kubeflow.example.com/oauth2/sign_out`
-- Web Origins: `*`
+
+-   Client Type: `OpenID Connect`
+-   Client ID: `kubeflow-oidc-authservice` (⚠️ Never use a different value)
+-   Client Authentication: `On`
+-   Authentication Flow: Check `Standard flow` and `Direct access grants`
+-   Root URL: `https://kubeflow.example.com`
+-   Home URL: `https://kubeflow.example.com`
+-   Valid Redirect URIs: `https://kubeflow.example.com/dex/callback`
+-   Valid Post Logout Redirect URIs: `https://kubeflow.example.com/oauth2/sign_out`
+-   Web Origins: `*`
 
 After creating the realm and client, note down the **Client Secret**(`YOUR_KEYCLOAK_CLIENT_SECRET`) which will be used in later steps.
 
@@ -79,7 +80,7 @@ data:
         redirectURI: $REDIRECT_URI
         insecure: false
         insecureSkipEmailVerified: true
-        userNameKey: email       
+        userNameKey: email
         scopes:
           - openid
           - profile
@@ -93,6 +94,7 @@ kustomize build common/dex/overlays/oauth2-proxy | kubectl apply -f -
 ```
 
 ## Update OAuth2 Proxy Configuration
+
 Configure the OAuth2 Proxy to use the newly configured Dex issuer.
 
 ```bash
@@ -119,8 +121,8 @@ api_routes = [
 
 skip_oidc_discovery = true
 login_url = "/dex/auth"
-redeem_url = "http://dex.auth.svc.cluster.local:5556/dex/token"
-oidc_jwks_url = "http://dex.auth.svc.cluster.local:5556/dex/keys"
+redeem_url = "http://dex.auth.svc.cluster.pakcarik:5556/dex/token"
+oidc_jwks_url = "http://dex.auth.svc.cluster.pakcarik:5556/dex/keys"
 
 skip_provider_button = false
 
@@ -150,6 +152,7 @@ kustomize build common/oauth2-proxy/overlays/m2m-dex-only/ | kubectl apply -f -
 ```
 
 ## Update Istio Request Authentication
+
 Adjust the Istio Request Authentication configuration to pass the correct JWT claims.
 
 ```bash
@@ -185,14 +188,15 @@ kustomize build common/oauth2-proxy/overlays/m2m-dex-only/ | kubectl apply -f -
 ```
 
 ## Final Checks
-- **Review Logs**: Make sure to tail the logs of the Dex, OAuth2 Proxy, and Istio ingress gateway deployments to verify that the configurations are working as expected.
-- **Test Authentication**: Try accessing your Kubeflow endpoint (ex. https://kubeflow.example.com) and verify that you’re redirected to Keycloak for authentication and that after login you are correctly returned to Kubeflow.
+
+-   **Review Logs**: Make sure to tail the logs of the Dex, OAuth2 Proxy, and Istio ingress gateway deployments to verify that the configurations are working as expected.
+-   **Test Authentication**: Try accessing your Kubeflow endpoint (ex. https://kubeflow.example.com) and verify that you’re redirected to Keycloak for authentication and that after login you are correctly returned to Kubeflow.
 
 ---
 
 # Known issues
 
-- Microsoft Azure deployment with AD groups authentication: having a large number of AD groups assigned to a user may lead to Dex authentication issues with HTTP 4xx/5xx responses. To fix this - make the authentication more precise with the whitelisting of the groups. [Documentation reference](https://dexidp.io/docs/connectors/microsoft/#:~:text=%2D%20email-,Groups,-When%20the%20groups)
+-   Microsoft Azure deployment with AD groups authentication: having a large number of AD groups assigned to a user may lead to Dex authentication issues with HTTP 4xx/5xx responses. To fix this - make the authentication more precise with the whitelisting of the groups. [Documentation reference](https://dexidp.io/docs/connectors/microsoft/#:~:text=%2D%20email-,Groups,-When%20the%20groups)
 
 Dex configMap example:
 
@@ -211,10 +215,10 @@ Dex configMap example:
       "emailToLowercase"     = true (optional but should be always used)
       "groups"               = "<AD groups>"
       "onlySecurityGroups"   = true (optional, AD groups may have different assignments)
-      "useGroupsAsWhitelist" = true 
+      "useGroupsAsWhitelist" = true
     }
   }
 ]
 ```
----
 
+---

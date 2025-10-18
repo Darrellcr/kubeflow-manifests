@@ -5,7 +5,7 @@ metadata:
   labels:
     app: model-registry-ui
 spec:
-  host: model-registry-ui-service.kubeflow.svc.cluster.local
+  host: model-registry-ui-service.kubeflow.svc.cluster.pakcarik
   trafficPolicy:
     tls:
       mode: ISTIO_MUTUAL

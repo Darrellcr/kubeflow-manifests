@@ -16,7 +16,7 @@ data:
       interval: 5s
       probes: 3
       time: 10s
-    trustDomain: cluster.local
+    trustDomain: cluster.pakcarik
     extensionProviders:
     - envoyExtAuthzHttp:
         headersToDownstreamOnDeny:
@@ -31,6 +31,6 @@ data:
         includeRequestHeadersInCheck:
         - authorization
         - cookie
-        service: oauth2-proxy.oauth2-proxy.svc.cluster.local
+        service: oauth2-proxy.oauth2-proxy.svc.cluster.pakcarik
         port: 80
       name: oauth2-proxy

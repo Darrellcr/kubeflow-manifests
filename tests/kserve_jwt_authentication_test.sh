@@ -66,7 +66,7 @@ set -e
 
 set +e
 RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" \
-  -H "Host: test-sklearn-secure-predictor.${NAMESPACE}.svc.cluster.local" \
+  -H "Host: test-sklearn-secure-predictor.${NAMESPACE}.svc.cluster.pakcarik" \
   -H "Authorization: Bearer ${KSERVE_M2M_TOKEN}" \
   -H "Content-Type: application/json" \
   "http://${KSERVE_INGRESS_HOST_PORT}/v1/models/test-sklearn-secure:predict" \
@@ -79,7 +79,7 @@ fi
 
 set +e
 RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" \
-  -H "Host: test-sklearn-secure-predictor.${NAMESPACE}.svc.cluster.local" \
+  -H "Host: test-sklearn-secure-predictor.${NAMESPACE}.svc.cluster.pakcarik" \
   -H "Content-Type: application/json" \
   "http://${KSERVE_INGRESS_HOST_PORT}/v1/models/test-sklearn-secure:predict" \
   -d '{"instances": [[6.8, 2.8, 4.8, 1.4]]}')
@@ -95,7 +95,7 @@ ATTACKER_TOKEN="$(kubectl -n attacker-namespace create token attacker-sa)"
 
 set +e
 RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" \
-  -H "Host: test-sklearn-secure-predictor.${NAMESPACE}.svc.cluster.local" \
+  -H "Host: test-sklearn-secure-predictor.${NAMESPACE}.svc.cluster.pakcarik" \
   -H "Authorization: Bearer ${ATTACKER_TOKEN}" \
   -H "Content-Type: application/json" \
   "http://${KSERVE_INGRESS_HOST_PORT}/v1/models/test-sklearn-secure:predict" \

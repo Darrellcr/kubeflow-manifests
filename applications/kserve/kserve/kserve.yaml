@@ -32597,7 +32597,7 @@ data:
     |-\n   {    \n       \"enableGatewayApi\": false,\n       \"kserveIngressGateway\":
     \"kserve/kserve-ingress-gateway\",\n       \"ingressGateway\" : \"knative-serving/knative-ingress-gateway\",\n
     \      \"localGateway\" : \"knative-serving/knative-local-gateway\",\n       \"localGatewayService\"
-    : \"knative-local-gateway.istio-system.svc.cluster.local\",\n       \"ingressDomain\"
+    : \"knative-local-gateway.istio-system.svc.cluster.pakcarik\",\n       \"ingressDomain\"
     \ : \"example.com\",\n       \"additionalIngressDomains\": [\"additional-example.com\",
     \"additional-example-1.com\"],\n       \"ingressClassName\" : \"istio\",\n       \"domainTemplate\":
     \"{{ .Name }}-{{ .Namespace }}.{{ .IngressDomain }}\",\n       \"urlScheme\":
@@ -32632,7 +32632,7 @@ data:
     as network layer.\n       \"localGateway\" : \"knative-serving/knative-local-gateway\",\n
     \n       # localGatewayService specifies the hostname of the local gateway service.\n
     \      # NOTE: This configuration only applicable for serverless deployment with
-    Istio configured as network layer.\n       \"localGatewayService\" : \"knative-local-gateway.istio-system.svc.cluster.local\",\n
+    Istio configured as network layer.\n       \"localGatewayService\" : \"knative-local-gateway.istio-system.svc.cluster.pakcarik\",\n
     \n       # ingressDomain specifies the domain name which is used for creating
     the url.\n       # If ingressDomain is empty then example.com is used as default
     domain.\n       # NOTE: This configuration only applicable for raw deployment.\n
@@ -32849,7 +32849,7 @@ data:
   ingress: "{   \n    \"enableGatewayApi\": false,\n    \"kserveIngressGateway\":
     \"kserve/kserve-ingress-gateway\",\n    \"ingressGateway\" : \"knative-serving/knative-ingress-gateway\",\n
     \   \"localGateway\" : \"knative-serving/knative-local-gateway\",\n    \"localGatewayService\"
-    : \"knative-local-gateway.istio-system.svc.cluster.local\",\n    \"ingressDomain\"
+    : \"knative-local-gateway.istio-system.svc.cluster.pakcarik\",\n    \"ingressDomain\"
     \ : \"example.com\",\n    \"ingressClassName\" : \"istio\",\n    \"domainTemplate\":
     \"{{ .Name }}-{{ .Namespace }}.{{ .IngressDomain }}\",\n    \"urlScheme\": \"http\",\n
     \   \"disableIstioVirtualHost\": false,\n    \"disableIngressCreation\": false\n}"

@@ -7440,14 +7440,14 @@ data:
     # to actually change the configuration.
 
     # Default value for domain.
-    # Routes having the cluster domain suffix (by default 'svc.cluster.local')
+    # Routes having the cluster domain suffix (by default 'svc.cluster.pakcarik')
     # will not be exposed through Ingress. You can define your own label
     # selector to assign that domain suffix to your Route here, or you can set
     # the label
     #    "networking.knative.dev/visibility=cluster-local"
     # to achieve the same effect.  This shows how to make routes having
     # the label app=secret only exposed to the local cluster.
-    svc.cluster.local: |
+    svc.cluster.pakcarik: |
       selector:
         app: secret
 
@@ -8210,7 +8210,7 @@ data:
 
     # URL to zipkin collector where traces are sent.
     # This must be specified when backend is "zipkin"
-    zipkin-endpoint: "http://zipkin.istio-system.svc.cluster.local:9411/api/v2/spans"
+    zipkin-endpoint: "http://zipkin.istio-system.svc.cluster.pakcarik:9411/api/v2/spans"
 
     # Enable zipkin debug mode. This allows all spans to be sent to the server
     # bypassing sampling.

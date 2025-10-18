@@ -455,7 +455,7 @@ Database environment variables helper
 Self-signed certificate for webhook (development only)
 */}}
 {{- define "katib.webhook.selfSignedCert" -}}
-{{- $altNames := list (printf "%s.%s.svc" (include "katib.webhook.serviceName" .) (include "katib.namespace" .)) (printf "%s.%s.svc.cluster.local" (include "katib.webhook.serviceName" .) (include "katib.namespace" .)) -}}
+{{- $altNames := list (printf "%s.%s.svc" (include "katib.webhook.serviceName" .) (include "katib.namespace" .)) (printf "%s.%s.svc.cluster.pakcarik" (include "katib.webhook.serviceName" .) (include "katib.namespace" .)) -}}
 {{- $ca := genCA "katib-ca" 365 -}}
 {{- $cert := genSignedCert "katib-webhook" nil $altNames 365 $ca -}}
 {{- if not .Values._generatedCert -}}
@@ -468,7 +468,7 @@ Self-signed certificate for webhook (development only)
 Self-signed private key for webhook (development only)
 */}}
 {{- define "katib.webhook.selfSignedKey" -}}
-{{- $altNames := list (printf "%s.%s.svc" (include "katib.webhook.serviceName" .) (include "katib.namespace" .)) (printf "%s.%s.svc.cluster.local" (include "katib.webhook.serviceName" .) (include "katib.namespace" .)) -}}
+{{- $altNames := list (printf "%s.%s.svc" (include "katib.webhook.serviceName" .) (include "katib.namespace" .)) (printf "%s.%s.svc.cluster.pakcarik" (include "katib.webhook.serviceName" .) (include "katib.namespace" .)) -}}
 {{- $ca := genCA "katib-ca" 365 -}}
 {{- $cert := genSignedCert "katib-webhook" nil $altNames 365 $ca -}}
 {{- if not .Values._generatedCert -}}

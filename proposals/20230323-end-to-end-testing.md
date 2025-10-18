@@ -14,8 +14,8 @@ test for the Manifest repo, this doc proposes a design to set up the infrastruct
 
 References
 
-- [Optional Test Infra Deprecation Notice](https://github.com/kubeflow/testing/issues/993)
-- [Alternative solution to removal of test on optional-test-infra](https://github.com/kubeflow/testing/issues/1006)
+-   [Optional Test Infra Deprecation Notice](https://github.com/kubeflow/testing/issues/993)
+-   [Alternative solution to removal of test on optional-test-infra](https://github.com/kubeflow/testing/issues/1006)
 
 ## Goal
 
@@ -32,21 +32,21 @@ spawn an EC2 instance with enough resources to deploy the complete Kubeflow solu
 
 Below lists steps the GitHub actions will perform to complete end-to-end testing
 
-- [Create Credentials required by the AWS](#create-credentials-required-by-the-aws)
-- [Create an EC2 instance](#create-an-ec2-instance)
-- [Install a Kubernetes on the instance](#install-a-kubernetes-on-the-instance)
-- [Deploy Kubeflow](#deploy-kubeflow)
-- [Run tests](#run-tests)
-- [Log and report errors](#log-and-report-errors)
-- [Clean up](#clean-up)
+-   [Create Credentials required by the AWS](#create-credentials-required-by-the-aws)
+-   [Create an EC2 instance](#create-an-ec2-instance)
+-   [Install a Kubernetes on the instance](#install-a-kubernetes-on-the-instance)
+-   [Deploy Kubeflow](#deploy-kubeflow)
+-   [Run tests](#run-tests)
+-   [Log and report errors](#log-and-report-errors)
+-   [Clean up](#clean-up)
 
 ### Create credentials required by the AWS
 
 To leverage AWS, two credentials are required:
 
-- `AWS_ACCESS_KEY_ID`: Specifies an AWS access key associated with an IAM user or role.
-- `AWS_SECRET_ACCESS_KEY`: Specifies the secret key associated with the access key. This is essentially the "password"
-  for the access key.
+-   `AWS_ACCESS_KEY_ID`: Specifies an AWS access key associated with an IAM user or role.
+-   `AWS_SECRET_ACCESS_KEY`: Specifies the secret key associated with the access key. This is essentially the "password"
+    for the access key.
 
 Both credentials needs to
 be [stored as secrets on GitHub](https://docs.github.com/en/actions/security-guides/encrypted-secrets)
@@ -65,10 +65,10 @@ Access the AWS credentials (stored as GH Secrets) and create an EC2 instance
 Using [juju](https://juju.is/) as an orchestration, configure AWS credentials and deploy an EC2 instance with the
 following configurations
 
-- Image: Ubuntu Server (latest)
-- Type: t3a.xlarge
-- Root disk: 80G
-- Region: us-east-1 (default)
+-   Image: Ubuntu Server (latest)
+-   Type: t3a.xlarge
+-   Root disk: 80G
+-   Region: us-east-1 (default)
 
 #### Why juju?
 
@@ -86,8 +86,8 @@ Install Kubernetes on the EC2 instance where Kubeflow will be deployed and teste
 
 To install Kubernetes, we explored two options and propose to use **KinD**
 
-- [Microk8s](#microk8s)
-- [KinD](#kind)
+-   [Microk8s](#microk8s)
+-   [KinD](#kind)
 
 #### KinD
 
@@ -149,16 +149,16 @@ existing [e2e mnist python script](https://github.com/kubeflow/manifests/tree/ma
 and [e2e mnist notebook](https://github.com/kubeflow/pipelines/blob/master/samples/experimental/kubeflow-e2e-mnist/kubeflow-e2e-mnist.ipynb)
 .
 
-- [Python script](#python-script)
-- [Jupyter notebook](#jupyter-notebook)
+-   [Python script](#python-script)
+-   [Jupyter notebook](#jupyter-notebook)
 
 Both python and notebook tests the following:
 
-- Kfp and Katib SDK packages (compatibility with other python packages)
-- Creation and execution of a pipeline from a user namespace
-- Creation and execution of hyperparameter running with Katib from a user namespace
-- Creation and execution of distributive training with TFJob from a user namespace
-- Creation and execution of inference using KServe from a user namespace
+-   Kfp and Katib SDK packages (compatibility with other python packages)
+-   Creation and execution of a pipeline from a user namespace
+-   Creation and execution of hyperparameter running with Katib from a user namespace
+-   Creation and execution of distributive training with TFJob from a user namespace
+-   Creation and execution of inference using KServe from a user namespace
 
 **Note**: The mnist notebook does not test the Kubeflow Notebook resources. In the future, additional verification and
 tests should be added to cover various Kubeflow components and features.
@@ -177,6 +177,7 @@ Step to run e2e python script from the workflow:
 Step to run e2e notebook from the workflow:
 
 1. Get e2e mnist notebook
+
     1. To run the existing e2e mnist notebook, modification needs to be made in the last step to wait for the triggered
        run to finish running before executing. Changes proposed are defined below and a pull request will need to be
        made in the future to avoid copying mnist notebook into the manifest directory.
@@ -186,42 +187,43 @@ Step to run e2e notebook from the workflow:
     import time
     from PIL import Image
     import requests
-    
+
     # Pipeline Run should be succeeded.
     run_status = kfp_client.get_run(run_id=run_id).run.status
-    
+
     if run_status == None:
         print("Waiting for the Run {} to start".format(run_id))
         time.sleep(60)
         run_status = kfp_client.get_run(run_id=run_id).run.status
-    
+
     while run_status == "Running":
         print("Run {} is in progress".format(run_id))
         time.sleep(60)
         run_status = kfp_client.get_run(run_id=run_id).run.status
-    
+
     if run_status == "Succeeded":
         print("Run {} has Succeeded\n".format(run_id))
-    
+
         # Specify the image URL here.
         image_url = "https://raw.githubusercontent.com/kubeflow/katib/master/examples/v1beta1/kubeflow-pipelines/images/9.bmp"
         image = Image.open(requests.get(image_url, stream=True).raw)
         data = np.array(image.convert('L').resize((28, 28))).astype(float).reshape(-1, 28, 28, 1)
         data_formatted = np.array2string(data, separator=",", formatter={"float": lambda x: "%.1f" % x})
         json_request = '{{ "instances" : {} }}'.format(data_formatted)
-    
+
         # Specify the prediction URL. If you are runing this notebook outside of Kubernetes cluster, you should set the Cluster IP.
-        url = "http://{}-predictor-default.{}.svc.cluster.local/v1/models/{}:predict".format(name, namespace, name)
-    
+        url = "http://{}-predictor-default.{}.svc.cluster.pakcarik/v1/models/{}:predict".format(name, namespace, name)
+
         time.sleep(60)
         response = requests.post(url, data=json_request)
-    
+
         print("Prediction for the image")
         display(image)
         print(response.json())
     else:
         raise Exception("Run {} failed with status {}\n".format(run_id, kfp_client.get_run(run_id=run_id).run.status))
     ```
+
 2. Move the mnist notebook into the cluster
     ```shell
     kubectl -n kubeflow-user-example-com create configmap <configmap name> --from-file kubeflow-e2e-mnist.ipynb
@@ -332,10 +334,10 @@ an AWS EC2 instance.
 
 **Notes**:
 
-- GitHub secrets are limited to the Manifest repo and do not cascade to forked repositories. To debug, users must set up
-  their own AWS secrets.
-- To debug the AWS EC2 instance without ssh into the GitHub system, you must have access to AWS credentials. Access to
-  AWS credentials is limited to [Manifest WG approvers](https://github.com/kubeflow/manifests/blob/master/OWNERS).
+-   GitHub secrets are limited to the Manifest repo and do not cascade to forked repositories. To debug, users must set up
+    their own AWS secrets.
+-   To debug the AWS EC2 instance without ssh into the GitHub system, you must have access to AWS credentials. Access to
+    AWS credentials is limited to [Manifest WG approvers](https://github.com/kubeflow/manifests/blob/master/OWNERS).
 
 ## Proof of Concept Workflow
 
@@ -346,13 +348,13 @@ and [failed](https://github.com/DomFleischmann/manifests/actions/runs/4119052861
 
 The proposed end-to-end workflow has been tested with the following Kubernetes and Kubeflow versions
 
-- 1.22 Kubernetes and [1.6.1 Kubeflow release](https://github.com/kubeflow/manifests/releases/tag/v1.6.1) (microk8s)
-- 1.24 Kubernetes and main branch of the manifest
-  repo ([last commit](https://github.com/DomFleischmann/manifests/commit/8e5714171f1fd5b00f59f436e9ab8cb45a0f30e3)) (
-  microk8s)
-- 1.25 Kuberentes and main branch of the manifest
-  repo ([last commit](https://github.com/DomFleischmann/manifests/commit/8e5714171f1fd5b00f59f436e9ab8cb45a0f30e3)) (
-  kind)
+-   1.22 Kubernetes and [1.6.1 Kubeflow release](https://github.com/kubeflow/manifests/releases/tag/v1.6.1) (microk8s)
+-   1.24 Kubernetes and main branch of the manifest
+    repo ([last commit](https://github.com/DomFleischmann/manifests/commit/8e5714171f1fd5b00f59f436e9ab8cb45a0f30e3)) (
+    microk8s)
+-   1.25 Kuberentes and main branch of the manifest
+    repo ([last commit](https://github.com/DomFleischmann/manifests/commit/8e5714171f1fd5b00f59f436e9ab8cb45a0f30e3)) (
+    kind)
 
 ### Alternative solutions considered
 

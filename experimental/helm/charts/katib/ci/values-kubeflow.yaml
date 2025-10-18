@@ -83,7 +83,7 @@ istio:
     rules:
       - from:
           - source:
-              principals: ["cluster.local/ns/istio-system/sa/istio-ingressgateway-service-account"]
+              principals: ["cluster.pakcarik/ns/istio-system/sa/istio-ingressgateway-service-account"]
   virtualService:
     enabled: true
     gateways:
@@ -98,7 +98,7 @@ istio:
           uri: /katib/
         route:
           - destination:
-              host: katib-ui.kubeflow.svc.cluster.local
+              host: katib-ui.kubeflow.svc.cluster.pakcarik
               port:
                 number: 80
 

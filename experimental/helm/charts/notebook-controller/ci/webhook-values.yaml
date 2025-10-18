@@ -18,7 +18,7 @@ controller:
     useIstio: true
     istioGateway: "kubeflow/kubeflow-gateway"
     istioHost: "*"
-    clusterDomain: "cluster.local"
+    clusterDomain: "cluster.pakcarik"
     enableCulling: false
     cullIdleTime: "1440"
     idlenessCheckPeriod: "1"

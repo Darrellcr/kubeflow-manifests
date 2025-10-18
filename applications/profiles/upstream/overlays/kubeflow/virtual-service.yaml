@@ -19,6 +19,6 @@ spec:
       uri: /kfam/
     route:
     - destination:
-        host: profiles-kfam.$(PROFILES_NAMESPACE).svc.cluster.local
+        host: profiles-kfam.$(PROFILES_NAMESPACE).svc.cluster.pakcarik
         port:
           number: 8081

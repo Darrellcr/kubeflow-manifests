@@ -37,7 +37,7 @@ EOF
 
 function test_gateway_authentication() {
     RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" \
-        -H "Host: secure-model-predictor.$PRIMARY_NAMESPACE.svc.cluster.local" \
+        -H "Host: secure-model-predictor.$PRIMARY_NAMESPACE.svc.cluster.pakcarik" \
         "http://$INGRESS_HOST_PORT/")
     
     if [ "$RESPONSE" != "403" ]; then
@@ -45,7 +45,7 @@ function test_gateway_authentication() {
     fi
     
     RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" \
-        -H "Host: secure-model-predictor.$PRIMARY_NAMESPACE.svc.cluster.local" \
+        -H "Host: secure-model-predictor.$PRIMARY_NAMESPACE.svc.cluster.pakcarik" \
         -H "Authorization: Bearer invalid-token" \
         "http://$INGRESS_HOST_PORT/")
     
@@ -59,7 +59,7 @@ function test_namespace_isolation() {
     ATTACKER_TOKEN=$(kubectl -n $ATTACKER_NAMESPACE create token attacker-sa)
     
     RESPONSE=$(curl -s -w "%{http_code}" \
-        -H "Host: secure-model-predictor.$PRIMARY_NAMESPACE.svc.cluster.local" \
+        -H "Host: secure-model-predictor.$PRIMARY_NAMESPACE.svc.cluster.pakcarik" \
         -H "Authorization: Bearer $PRIMARY_TOKEN" \
         "http://$INGRESS_HOST_PORT/")
     
@@ -68,7 +68,7 @@ function test_namespace_isolation() {
     fi
     
     RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" \
-        -H "Host: secure-model-predictor.$PRIMARY_NAMESPACE.svc.cluster.local" \
+        -H "Host: secure-model-predictor.$PRIMARY_NAMESPACE.svc.cluster.pakcarik" \
         -H "Authorization: Bearer $ATTACKER_TOKEN" \
         "http://$INGRESS_HOST_PORT/")
     
@@ -85,12 +85,12 @@ function test_cluster_local_gateway() {
     PRIMARY_TOKEN=$(kubectl -n $PRIMARY_NAMESPACE create token default-editor)
     
     curl -s -o /dev/null -w "%{http_code}" \
-        -H "Host: secure-model-predictor.$PRIMARY_NAMESPACE.svc.cluster.local" \
+        -H "Host: secure-model-predictor.$PRIMARY_NAMESPACE.svc.cluster.pakcarik" \
         -H "Authorization: Bearer $PRIMARY_TOKEN" \
         "http://localhost:8081/" > /dev/null
     
     RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" \
-        -H "Host: secure-model-predictor.$PRIMARY_NAMESPACE.svc.cluster.local" \
+        -H "Host: secure-model-predictor.$PRIMARY_NAMESPACE.svc.cluster.pakcarik" \
         "http://localhost:8081/")
     
     if [ "$RESPONSE" != "403" ]; then

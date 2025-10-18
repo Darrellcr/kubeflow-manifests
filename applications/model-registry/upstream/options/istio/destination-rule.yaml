@@ -3,7 +3,7 @@ kind: DestinationRule
 metadata:
   name: model-registry-service
 spec:
-  host: model-registry-service.kubeflow.svc.cluster.local
+  host: model-registry-service.kubeflow.svc.cluster.pakcarik
   trafficPolicy:
     tls:
       mode: ISTIO_MUTUAL

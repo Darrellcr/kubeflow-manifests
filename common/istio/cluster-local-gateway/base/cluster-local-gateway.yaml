@@ -82,7 +82,7 @@ spec:
         - proxy
         - router
         - --domain
-        - $(POD_NAMESPACE).svc.cluster.local
+        - $(POD_NAMESPACE).svc.cluster.pakcarik
         - --proxyLogLevel=warning
         - --proxyComponentLogLevel=misc:error
         - --log_output_level=default:info
@@ -132,9 +132,9 @@ spec:
           value: 
             kubernetes://apis/apps/v1/namespaces/istio-system/deployments/cluster-local-gateway
         - name: ISTIO_META_MESH_ID
-          value: cluster.local
+          value: cluster.pakcarik
         - name: TRUST_DOMAIN
-          value: cluster.local
+          value: cluster.pakcarik
         - name: ISTIO_META_UNPRIVILEGED_POD
           value: 'true'
         - name: ISTIO_META_CLUSTER_ID

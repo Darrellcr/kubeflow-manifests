@@ -147,7 +147,7 @@ Create authorization policy name
 Create destination host for virtual service
 */}}
 {{- define "kserve-models-web-app.destinationHost" -}}
-{{- printf "%s.%s.svc.cluster.local" (include "kserve-models-web-app.serviceName" .) (include "kserve-models-web-app.namespace" .) }}
+{{- printf "%s.%s.svc.cluster.pakcarik" (include "kserve-models-web-app.serviceName" .) (include "kserve-models-web-app.namespace" .) }}
 {{- end }}
 
 {{/*

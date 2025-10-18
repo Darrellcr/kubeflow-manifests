@@ -113,7 +113,7 @@ data:
     # external-gateways: |
     #   - name: {{gateway_name}}
     #     namespace: {{gateway_namespace}}
-    #     service: {{ingress_name}}.{{ingress_namespace}}.svc.cluster.local
+    #     service: {{ingress_name}}.{{ingress_namespace}}.svc.cluster.pakcarik
     #     labelSelector:
     #       matchExpressions:
     #       - key: {{label_key}}
@@ -129,16 +129,16 @@ data:
     external-gateways: |
       - name: knative-ingress-gateway
         namespace: knative-serving
-        service: istio-ingressgateway.istio-system.svc.cluster.local
+        service: istio-ingressgateway.istio-system.svc.cluster.pakcarik
     #
     #
     # The old format has the following pattern:
     # ```
-    # gateway.{{gateway_namespace}}.{{gateway_name}}: "{{ingress_name}}.{{ingress_namespace}}.svc.cluster.local"
+    # gateway.{{gateway_namespace}}.{{gateway_name}}: "{{ingress_name}}.{{ingress_namespace}}.svc.cluster.pakcarik"
     # ```
     # Please use the new configuration format `external-gateways` for future compatibility.
     # This configuration will raise an error if either `external-gateways` or `local-gateways` is defined.
-    gateway.knative-serving.knative-ingress-gateway: "istio-ingressgateway.istio-system.svc.cluster.local"
+    gateway.knative-serving.knative-ingress-gateway: "istio-ingressgateway.istio-system.svc.cluster.pakcarik"
 
 
     # local-gateways defines a cluster local gateway to allow pods outside of the mesh to access
@@ -156,7 +156,7 @@ data:
     # local-gateways: |
     #   - name: {{local_gateway_name}}
     #     namespace: {{local_gateway_namespace}}
-    #     service: {{cluster_local_gateway_name}}.{{cluster_local_gateway_namespace}}.svc.cluster.local
+    #     service: {{cluster_local_gateway_name}}.{{cluster_local_gateway_namespace}}.svc.cluster.pakcarik
     #     labelSelector:
     #       matchExpressions:
     #       - key: {{label_key}}
@@ -172,17 +172,17 @@ data:
     local-gateways: |
       - name: knative-local-gateway
         namespace: knative-serving
-        service: knative-local-gateway.istio-system.svc.cluster.local
+        service: knative-local-gateway.istio-system.svc.cluster.pakcarik
     #
     #
     # The old format has the following pattern:
     # ```
     # local-gateway.{{local_gateway_namespace}}.{{local_gateway_name}}:
-    # "{{cluster_local_gateway_name}}.{{cluster_local_gateway_namespace}}.svc.cluster.local"
+    # "{{cluster_local_gateway_name}}.{{cluster_local_gateway_namespace}}.svc.cluster.pakcarik"
     # ```
     # Please use the new configuration format `local-gateways` for future compatibility.
     # This configuration will raise an error if either `external-gateways` or `local-gateways` is defined.
-    local-gateway.knative-serving.knative-local-gateway: "knative-local-gateway.istio-system.svc.cluster.local"
+    local-gateway.knative-serving.knative-local-gateway: "knative-local-gateway.istio-system.svc.cluster.pakcarik"
 ---
 apiVersion: "security.istio.io/v1beta1"
 kind: "PeerAuthentication"

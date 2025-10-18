@@ -31,11 +31,11 @@ spec:
         uri: /
       route:
         - destination:
-            host: cluster-local-gateway.istio-system.svc.cluster.local
+            host: cluster-local-gateway.istio-system.svc.cluster.pakcarik
           headers:
             request:
               set:
-                Host: ${SERVICE_NAME}-predictor.${NAMESPACE}.svc.cluster.local
+                Host: ${SERVICE_NAME}-predictor.${NAMESPACE}.svc.cluster.pakcarik
           weight: 100
       timeout: 300s
       headers:

@@ -141,7 +141,7 @@ spec:
     - command:
       - bash
       - -c
-      - "export RAY_HEAD_ADDRESS=${HEAD_SVC}.${POD_NAMESPACE}.svc.cluster.local:6379\nSECONDS=0\n\nwhile
+      - "export RAY_HEAD_ADDRESS=${HEAD_SVC}.${POD_NAMESPACE}.svc.cluster.pakcarik:6379\nSECONDS=0\n\nwhile
         true; do              \n  if (( SECONDS <= 240 )); then\n    if ray health-check
         --address \"${RAY_HEAD_ADDRESS}\" > /dev/null 2>&1; then\n      echo \"Ray
         Global Control Service(GCS) is ready.\"\n      break\n    fi\n    echo \"$SECONDS
@@ -168,7 +168,7 @@ spec:
           - bash
           - -c
           - |
-            export RAY_ADDRESS=${HEAD_SVC}.${POD_NAMESPACE}.svc.cluster.local:6379
+            export RAY_ADDRESS=${HEAD_SVC}.${POD_NAMESPACE}.svc.cluster.pakcarik:6379
             python ./huggingfaceserver/health_check.py registered_nodes --probe_name worker_liveness
         failureThreshold: 2
         periodSeconds: 5
@@ -188,7 +188,7 @@ spec:
           - bash
           - -c
           - |
-            export RAY_HEAD_NODE=${HEAD_SVC}.${POD_NAMESPACE}.svc.cluster.local
+            export RAY_HEAD_NODE=${HEAD_SVC}.${POD_NAMESPACE}.svc.cluster.pakcarik
             export RAY_ADDRESS=${RAY_HEAD_NODE}:6379
             python ./huggingfaceserver/health_check.py registered_node_and_runtime_models --runtime_url http://${RAY_HEAD_NODE}:8080/v1/models --probe_name worker_startup
         failureThreshold: 40

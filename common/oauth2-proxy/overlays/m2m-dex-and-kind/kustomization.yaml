@@ -23,10 +23,10 @@ patches:
 - patch: |-
     - op: replace
       path: /spec/jwtRules/0/issuer
-      value: https://kubernetes.default.svc.cluster.local
+      value: https://kubernetes.default.svc.cluster.pakcarik
     - op: replace
       path: /spec/jwtRules/0/jwksUri
-      value: http://cluster-jwks-proxy.istio-system.svc.cluster.local/openid/v1/jwks
+      value: http://cluster-jwks-proxy.istio-system.svc.cluster.pakcarik/openid/v1/jwks
   target:
     group: security.istio.io
     version: v1beta1
@@ -39,7 +39,7 @@ patches:
       path: /spec/jwtRules/-
       value:
         issuer: "https://kubernetes.default.svc"
-        jwksUri: "http://cluster-jwks-proxy.istio-system.svc.cluster.local/openid/v1/jwks"
+        jwksUri: "http://cluster-jwks-proxy.istio-system.svc.cluster.pakcarik/openid/v1/jwks"
         forwardOriginalToken: true
         outputClaimToHeaders:
         - header: kubeflow-userid

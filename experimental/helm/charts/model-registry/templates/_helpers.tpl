@@ -325,7 +325,7 @@ Get the full service URL for configuring resources
 {{- define "model-registry.service.fullhost" -}}
 {{- $serviceName := include "model-registry.service.name" . -}}
 {{- $namespace := include "model-registry.namespace" . -}}
-{{- printf "%s.%s.svc.cluster.local" $serviceName $namespace -}}
+{{- printf "%s.%s.svc.cluster.pakcarik" $serviceName $namespace -}}
 {{- end -}}
 
 {{/*

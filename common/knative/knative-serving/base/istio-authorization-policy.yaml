@@ -72,7 +72,7 @@ metadata:
   name: knative
   namespace: knative-serving
 spec:
-  host: "*.knative-serving.svc.cluster.local"
+  host: "*.knative-serving.svc.cluster.pakcarik"
   trafficPolicy:
     tls:
       mode: ISTIO_MUTUAL

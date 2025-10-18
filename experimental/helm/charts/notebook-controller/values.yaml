@@ -70,7 +70,7 @@ controller:
     # -- Istio host configuration
     istioHost: "*"
     # -- Cluster domain
-    clusterDomain: "cluster.local"
+    clusterDomain: "cluster.pakcarik"
     # -- Enable notebook culling
     enableCulling: false
     # -- Cull idle time (in minutes - note: original uses minutes without suffix)

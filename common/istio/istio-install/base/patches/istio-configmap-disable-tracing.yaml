@@ -17,4 +17,4 @@ data:
       interval: 5s
       probes: 3
       time: 10s
-    trustDomain: cluster.local
+    trustDomain: cluster.pakcarik

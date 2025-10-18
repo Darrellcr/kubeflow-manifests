@@ -35,7 +35,7 @@ EOF
 
 function test_gateway_jwt_validation() {
     RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" \
-        -H "Host: secure-sklearn-predictor.$PRIMARY_NAMESPACE.svc.cluster.local" \
+        -H "Host: secure-sklearn-predictor.$PRIMARY_NAMESPACE.svc.cluster.pakcarik" \
         "http://$KSERVE_INGRESS_HOST_PORT/v1/models/secure-sklearn:predict" \
         -d '{"instances": [[6.8, 2.8, 4.8, 1.4]]}' \
         -H "Content-Type: application/json")
@@ -45,7 +45,7 @@ function test_gateway_jwt_validation() {
     fi
 
     RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" \
-        -H "Host: secure-sklearn-predictor.$PRIMARY_NAMESPACE.svc.cluster.local" \
+        -H "Host: secure-sklearn-predictor.$PRIMARY_NAMESPACE.svc.cluster.pakcarik" \
         -H "Authorization: Bearer invalid-token-123" \
         "http://$KSERVE_INGRESS_HOST_PORT/v1/models/secure-sklearn:predict" \
         -d '{"instances": [[6.8, 2.8, 4.8, 1.4]]}' \
@@ -61,7 +61,7 @@ function test_namespace_isolation() {
     ATTACKER_TOKEN=$(kubectl -n $ATTACKER_NAMESPACE create token attacker-sa)
 
     RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" \
-        -H "Host: secure-sklearn-predictor.$PRIMARY_NAMESPACE.svc.cluster.local" \
+        -H "Host: secure-sklearn-predictor.$PRIMARY_NAMESPACE.svc.cluster.pakcarik" \
         -H "Authorization: Bearer $PRIMARY_TOKEN" \
         "http://$KSERVE_INGRESS_HOST_PORT/v1/models/secure-sklearn:predict" \
         -d '{"instances": [[6.8, 2.8, 4.8, 1.4]]}' \
@@ -72,7 +72,7 @@ function test_namespace_isolation() {
     fi
 
     RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" \
-        -H "Host: secure-sklearn-predictor.$PRIMARY_NAMESPACE.svc.cluster.local" \
+        -H "Host: secure-sklearn-predictor.$PRIMARY_NAMESPACE.svc.cluster.pakcarik" \
         -H "Authorization: Bearer $ATTACKER_TOKEN" \
         "http://$KSERVE_INGRESS_HOST_PORT/v1/models/secure-sklearn:predict" \
         -d '{"instances": [[6.8, 2.8, 4.8, 1.4]]}' \
@@ -103,7 +103,7 @@ function test_internal_access() {
         curl -s -o /dev/null -w "%{http_code}" \
         -H "Authorization: Bearer $PRIMARY_TOKEN" \
         -H "Content-Type: application/json" \
-        "http://secure-sklearn-predictor.$PRIMARY_NAMESPACE.svc.cluster.local/v1/models/secure-sklearn:predict" \
+        "http://secure-sklearn-predictor.$PRIMARY_NAMESPACE.svc.cluster.pakcarik/v1/models/secure-sklearn:predict" \
         -d '{"instances": [[6.8, 2.8, 4.8, 1.4]]}' 2>/dev/null || true
 
     kubectl delete pod test-client -n $PRIMARY_NAMESPACE --ignore-not-found=true

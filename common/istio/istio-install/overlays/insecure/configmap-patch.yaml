@@ -43,7 +43,7 @@ data:
       priorityClassName: ""
       proxy:
         autoInject: enabled
-        clusterDomain: cluster.local
+        clusterDomain: cluster.pakcarik
         componentLogLevel: misc:error
         excludeIPRanges: ""
         excludeInboundPorts: ""

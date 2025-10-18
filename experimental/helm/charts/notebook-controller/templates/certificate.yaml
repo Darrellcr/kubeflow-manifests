@@ -38,7 +38,7 @@ spec:
     {{- toYaml .Values.certificates.dnsNames | nindent 4 }}
   {{- else }}
     - {{ include "notebook-controller.resourceName" . }}-webhook-service.{{ include "notebook-controller.namespace" . }}.svc
-    - {{ include "notebook-controller.resourceName" . }}-webhook-service.{{ include "notebook-controller.namespace" . }}.svc.cluster.local
+    - {{ include "notebook-controller.resourceName" . }}-webhook-service.{{ include "notebook-controller.namespace" . }}.svc.cluster.pakcarik
   {{- end }}
   {{- end }}
   {{- with .Values.certificates.ipAddresses }}

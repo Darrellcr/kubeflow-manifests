@@ -23,7 +23,7 @@ spec:
       uri: /
     route:
     - destination:
-        host: {{ include "model-registry.ui.fullname" . }}-service.{{ include "model-registry.namespace" . }}.svc.cluster.local
+        host: {{ include "model-registry.ui.fullname" . }}-service.{{ include "model-registry.namespace" . }}.svc.cluster.pakcarik
         port:
           number: {{ .Values.ui.service.port }}
 {{- end }} 
