@@ -108,6 +108,12 @@ resources:
 # Here is the internal documentation for Ray: - ../experimental/ray/README.md
 # - ../experimental/ray/kuberay-operator/overlays/kubeflow
 
+patches:
+- path: patches/istiod-webhook-hostnetwork.yaml
+- path: patches/knative-webhook-hostnetwork.yaml
+- path: patches/kserve-webhook-hostnetwork.yaml
+- path: patches/kubeflow-trainer-webhook-hostnetwork.yaml
+
 components:
 # https://kubernetes.io/docs/concepts/security/pod-security-standards/
 # For all static namespaces we already enforce PSS restricted
