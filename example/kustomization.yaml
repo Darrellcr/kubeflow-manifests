@@ -113,6 +113,7 @@ patches:
 - path: patches/knative-webhook-hostnetwork.yaml
 - path: patches/kserve-webhook-hostnetwork.yaml
 - path: patches/kubeflow-trainer-webhook-hostnetwork.yaml
+- path: patches/istio-cni-config.yaml
 
 components:
 # https://kubernetes.io/docs/concepts/security/pod-security-standards/
