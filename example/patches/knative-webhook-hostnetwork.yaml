@@ -16,7 +16,7 @@ spec:
       hostNetwork: true
       dnsPolicy: ClusterFirstWithHostNet
 ---
-apiVersion: v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: net-istio-webhook
