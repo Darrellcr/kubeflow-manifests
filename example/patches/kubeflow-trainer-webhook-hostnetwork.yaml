@@ -15,24 +15,3 @@ spec:
     spec:
       hostNetwork: true
       dnsPolicy: ClusterFirstWithHostNet
----
-apiVersion: cert-manager.io/v1
-kind: Issuer
-metadata:
-  name: selfsigned-issuer
-  namespace: kubeflow-system
-spec:
-  selfSigned: {}
----
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: kubeflow-trainer-webhook-cert
-  namespace: kubeflow-system
-spec:
-  dnsNames:
-  - kubeflow-trainer-controller-manager.kubeflow-system.svc
-  - kubeflow-trainer-controller-manager.kubeflow-system.svc.cluster.pakcarik
-issuerRef:
-  name: selfsigned-issuer
-  kind: Issuer

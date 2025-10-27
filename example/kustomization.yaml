@@ -108,6 +108,9 @@ resources:
 # Here is the internal documentation for Ray: - ../experimental/ray/README.md
 # - ../experimental/ray/kuberay-operator/overlays/kubeflow
 
+# Newly created resources
+- resources/kubeflow-trainer-cert.yaml
+
 patches:
 - path: patches/istiod-webhook-hostnetwork.yaml
 - path: patches/knative-webhook-hostnetwork.yaml
