@@ -9,5 +9,12 @@ resources:
 patches:
 - path: patches/gateway-selector-in-knative-serving.yaml
 - path: patches/gateway-selector-in-istio-system.yaml
-- path: patches/config-domain.yaml
+- target:
+    kind: ConfigMap
+    name: config-domain
+    namespace: knative-serving
+  patch: |-
+    - op: add
+      path: /data/example.com
+      value: ""
 

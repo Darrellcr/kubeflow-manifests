@@ -15,4 +15,43 @@ spec:
     spec:
       hostNetwork: true
       dnsPolicy: ClusterFirstWithHostNet
-      
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kserve-controller-manager
+  namespace: kubeflow
+spec:
+  template:
+    spec:
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+      containers:
+      - name: manager
+        ports:
+        - containerPort: 29443
+          name: webhook-server
+          protocol: TCP
+          hostPort: 29443
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 28081
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: 28081
+        args:
+        - --metrics-addr=127.0.0.1:28080
+        - --leader-elect
+      - name: kube-rbac-proxy
+        ports:
+        - containerPort: 28443
+          name: https
+          protocol: TCP
+          hostPort: 28443
+        args:
+        - --secure-listen-address=0.0.0.0:28443
+        - --upstream=http://127.0.0.1:28080/
+        - --logtostderr=true
+        - --v=10
