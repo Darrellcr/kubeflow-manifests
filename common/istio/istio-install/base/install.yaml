@@ -774,7 +774,7 @@ data:
   AMBIENT_RECONCILE_POD_RULES_ON_STARTUP: 'false'
   CHAINED_CNI_PLUGIN: 'true'
   CURRENT_AGENT_VERSION: 1.27.0
-  EXCLUDE_NAMESPACES: kube-system
+  EXCLUDE_NAMESPACES: "kube-system,kube-public,kube-node-lease,cattle-fleet-clusters-system,cattle-fleet-local-system,cattle-fleet-system,cattle-global-data,cattle-global-nt,cattle-impersonation-system,cattle-provisioning-capi-system,cattle-system,cattle-ui-plugin-system,cert-manager,cluster-fleet-local-local-1a3d67d0a899,dcornelius,default,fleet-default,fleet-local,gpu-operator,kubernetes-dashboard,local,local-p-kbf62,local-p-mlj7f,p-g9nxj,p-ggkct,remmanuel,test-project,testing-deployment,torchx-worker,traefik-ingress,u-2l34xvfyto,u-2yzeymhrgz,u-5gb36qybh7,user-2cb4x,volcano-monitoring,volcano-system"
   ISTIO_OWNED_CNI_CONFIG: 'false'
   NATIVE_NFTABLES: 'false'
   REPAIR_BROKEN_POD_LABEL_KEY: cni.istio.io/uninitialized
