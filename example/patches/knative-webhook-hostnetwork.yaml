@@ -15,34 +15,3 @@ spec:
     spec:
       hostNetwork: true
       dnsPolicy: ClusterFirstWithHostNet
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: net-istio-webhook
-  namespace: knative-serving
-spec:
-  template:
-    spec:
-      hostNetwork: true
-      dnsPolicy: ClusterFirstWithHostNet
-      containers:
-        - name: webhook
-          env:
-            - name: WEBHOOK_PORT
-              value: "18443"
-          ports:
-            - name: metrics
-              containerPort: 19090
-            - name: profiling
-              containerPort: 18008
-            - name: https-webhook
-              containerPort: 18443
-          readinessProbe:
-            httpGet:
-              scheme: HTTPS
-              port: 18443
-          livenessProbe:
-            httpGet:
-              scheme: HTTPS
-              port: 18443

@@ -117,6 +117,76 @@ patches:
 - path: patches/kserve-webhook-hostnetwork.yaml
 - path: patches/kubeflow-trainer-webhook-hostnetwork.yaml
 - path: patches/istio-cni-config.yaml
+- target:
+    kind: Deployment
+    name: net-istio-webhook
+    namespace: knative-serving
+  patch: |-
+    - op: replace
+      path: /spec/template/spec/containers/0/ports
+      value: 
+        - name: metrics
+          containerPort: 19090
+        - name: profiling
+          containerPort: 18008
+        - name: https-webhook
+          containerPort: 18443
+    - op: add
+      path: /spec/template/spec/hostNetwork
+      value: true
+    - op: add
+      path: /spec/template/spec/dnsPolicy
+      value: ClusterFirstWithHostNet
+    - op: replace
+      path: /spec/template/spec/containers/0/env/5/value
+      value: "18443"
+    - op: replace
+      path: /spec/template/spec/containers/0/readinessProbe/httpGet/port
+      value: 18443
+    - op: replace
+      path: /spec/template/spec/containers/0/livenessProbe/httpGet/port
+      value: 18443
+- target:
+    kind: Deployment
+    name: kserve-controller-manager
+    namespace: kubeflow
+  patch: |-
+    - op: add
+      path: /spec/template/spec/hostNetwork
+      value: true
+    - op: add
+      path: /spec/template/spec/dnsPolicy
+      value: ClusterFirstWithHostNet
+    - op: replace
+      path: /spec/template/spec/containers/0/args/0
+      value: --metrics-addr=127.0.0.1:28080
+    - op: replace
+      path: /spec/template/spec/containers/0/readinessProbe/httpGet/port
+      value: 28081
+    - op: replace
+      path: /spec/template/spec/containers/0/livenessProbe/httpGet/port
+      value: 28081
+    - op: replace
+      path: /spec/template/spec/containers/0/ports/0
+      value:
+        containerPort: 29443
+        name: webhook-server
+        protocol: TCP
+        hostPort: 29443
+    - op: replace
+      path: /spec/template/spec/containers/1/args/0
+      value: --secure-listen-address=0.0.0.0:28443
+    - op: replace
+      path: /spec/template/spec/containers/1/args/1
+      value: --upstream=http://127.0.0.1:28080/
+    - op: replace
+      path: /spec/template/spec/containers/1/ports/0
+      value:
+        containerPort: 28443
+        name: https
+        protocol: TCP
+        hostPort: 28443
+
 
 components:
 # https://kubernetes.io/docs/concepts/security/pod-security-standards/
