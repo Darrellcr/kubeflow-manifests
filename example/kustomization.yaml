@@ -160,6 +160,9 @@ patches:
     - op: replace
       path: /spec/template/spec/containers/0/args/0
       value: --metrics-addr=127.0.0.1:28080
+    - op: add
+      path: /spec/template/spec/containers/0/args/-
+      value: --health-probe-addr=127.0.0.1:28081
     - op: replace
       path: /spec/template/spec/containers/0/readinessProbe/httpGet/port
       value: 28081
