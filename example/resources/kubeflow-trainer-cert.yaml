@@ -12,6 +12,7 @@ metadata:
   name: kubeflow-trainer-webhook-cert
   namespace: kubeflow-system
 spec:
+  secretName: kubeflow-trainer-webhook-cert
   dnsNames:
   - kubeflow-trainer-controller-manager.kubeflow-system.svc
   - kubeflow-trainer-controller-manager.kubeflow-system.svc.cluster.pakcarik
