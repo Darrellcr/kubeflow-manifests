@@ -175,7 +175,12 @@ patches:
         containerPort: 29443
         name: webhook-server
         protocol: TCP
-        hostPort: 29443
+    - op: add
+      path: /spec/template/spec/containers/0/ports/-
+      value:
+        containerPort: 28081
+        name: health-probe
+        protocol: TCP
     - op: replace
       path: /spec/template/spec/containers/1/args/0
       value: --secure-listen-address=0.0.0.0:28443
@@ -188,7 +193,6 @@ patches:
         containerPort: 28443
         name: https
         protocol: TCP
-        hostPort: 28443
 
 
 components:
