@@ -15,6 +15,6 @@ spec:
   dnsNames:
   - kubeflow-trainer-controller-manager.kubeflow-system.svc
   - kubeflow-trainer-controller-manager.kubeflow-system.svc.cluster.pakcarik
-issuerRef:
-  name: selfsigned-issuer
-  kind: Issuer
+  issuerRef:
+    name: selfsigned-issuer
+    kind: Issuer
