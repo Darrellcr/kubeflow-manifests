@@ -163,6 +163,9 @@ patches:
     - op: add
       path: /spec/template/spec/containers/0/args/-
       value: --health-probe-addr=:28081
+    - op: add
+      path: /spec/template/spec/containers/0/args/-
+      value: --webhook-port=29443
     - op: replace
       path: /spec/template/spec/containers/0/readinessProbe/httpGet/port
       value: 28081
