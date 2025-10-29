@@ -15,19 +15,19 @@ spec:
           mountPath: /controller_manager_config.yaml
           subPath: controller_manager_config.yaml
           readOnly: true
+        ports:
+        - containerPort: 39443
+          name: webhook
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 38081
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: 38081
       volumes:
       - name: kubeflow-trainer-config
         configMap:
           name: kubeflow-trainer-config
-      ports:
-      - containerPort: 39443
-        name: webhook
-        protocol: TCP
-      livenessProbe:
-        httpGet:
-          path: /healthz
-          port: 38081
-      readinessProbe:
-        httpGet:
-          path: /readyz
-          port: 38081
