@@ -7314,7 +7314,7 @@ metadata:
     knative.dev/example-checksum: "720ddb97"
 data:
   queue-sidecar-image: gcr.io/knative-releases/knative.dev/serving/cmd/queue@sha256:698ef80ebc698f4d2bb93c1e85684063a0cf253a83faebcbf106cee444181d8e
-  _example: |-
+  _example: |
     ################################
     #                              #
     #    EXAMPLE CONFIGURATION     #
@@ -7473,7 +7473,7 @@ metadata:
   annotations:
     knative.dev/example-checksum: "9ff569ad"
 data:
-  _example: |-
+  _example: |
     ################################
     #                              #
     #    EXAMPLE CONFIGURATION     #
