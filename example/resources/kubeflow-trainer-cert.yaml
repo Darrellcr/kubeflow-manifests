@@ -35,14 +35,6 @@ spec:
 
 ---
 apiVersion: cert-manager.io/v1
-kind: Issuer
-metadata:
-  name: selfsigned-issuer
-  namespace: kubeflow-system
-spec:
-  selfSigned: {}
----
-apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: kubeflow-trainer-webhook-cert
