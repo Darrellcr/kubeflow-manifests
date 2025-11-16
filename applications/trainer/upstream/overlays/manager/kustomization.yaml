@@ -17,9 +17,9 @@ images:
   - name: ghcr.io/kubeflow/trainer/trainer-controller-manager
     newTag: latest
 
-# # Secret for the Kubeflow Training webhook.
-# secretGenerator:
-#   - name: kubeflow-trainer-webhook-cert
-#     namespace: kubeflow-system
-#     options:
-#       disableNameSuffixHash: true
+# Secret for the Kubeflow Training webhook.
+secretGenerator:
+  - name: kubeflow-trainer-webhook-cert
+    namespace: kubeflow-system
+    options:
+      disableNameSuffixHash: true

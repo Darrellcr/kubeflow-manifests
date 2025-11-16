@@ -109,7 +109,7 @@ resources:
 # - ../experimental/ray/kuberay-operator/overlays/kubeflow
 
 # Newly created resources
-- resources/kubeflow-trainer-cert.yaml
+# - resources/kubeflow-trainer-cert.yaml
 
 patches:
 - path: patches/istiod-webhook-hostnetwork.yaml
